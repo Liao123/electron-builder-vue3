@@ -1,5 +1,6 @@
 const path = require('path')
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow ,ipcMain,MessageChannelMain} = require('electron')
+const electron = require('electron')
 
 function createWindow() {
     const win = new BrowserWindow({
@@ -14,12 +15,12 @@ function createWindow() {
 
     })
 
-    win.loadFile(path.join(__dirname, './dist/index.html'))
-    // win.loadURL(`http://localhost:8080`);
+    // win.loadFile(path.join(__dirname, './dist/index.html'))
+    win.loadURL(`http://localhost:8080`);
     // win.loadURL(`file://${__dirname}/dist/index.html`);
 
-
-    win.webContents.openDevTools();
+    
+    // win.webContents.openDevTools();
 }
 
 app.on('window-all-closed', function () {
@@ -32,8 +33,18 @@ app.whenReady().then(() => {
   app.on('activate', function () {
       if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
+
+  ipcMain.on('request-worker-channel', (event) => {
+    // if (event.senderFrame === mainWindow.webContents.mainFrame) {
+      // const { port1, port2 } = new MessageChannelMain()
+      console.log(512123331233);
+      // event.senderFrame.postMessage('provide-worker-channel', null, [port2])
+    // }
+  })
 })
 
-try {
-  require('electron-reloader')(module)
-}catch(e){}
+// Enable live reload for Electron too
+require('electron-reload')(__dirname, {
+    // Note that the path to electron may vary according to the main file
+    electron: require(`${path.join(__dirname, '../')}/node_modules/electron`)
+});
