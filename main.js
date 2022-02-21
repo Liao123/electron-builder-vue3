@@ -37,7 +37,7 @@ app.whenReady().then(() => {
   ipcMain.on('request-worker-channel', (event) => {
     // if (event.senderFrame === mainWindow.webContents.mainFrame) {
       // const { port1, port2 } = new MessageChannelMain()
-      console.log(512123331233);
+      console.log(51212333123310021);
       // event.senderFrame.postMessage('provide-worker-channel', null, [port2])
     // }
   })
@@ -46,5 +46,5 @@ app.whenReady().then(() => {
 // Enable live reload for Electron too
 require('electron-reload')(__dirname, {
     // Note that the path to electron may vary according to the main file
-    electron: require(`${path.join(__dirname, '../')}/node_modules/electron`)
+    electron: require(`${path.join(__dirname, '')}/node_modules/electron`)
 });
